@@ -6,11 +6,15 @@ else ()
     project(kkmeans VERSION 1.1.1)
 endif ()
 
+find_package(Threads REQUIRED)
+find_package(Boost REQUIRED)
+find_package(Boost COMPONENTS system iostreams filesystem REQUIRED)
+
 file(GLOB_RECURSE SOURCES *.cpp *.h)
 
 # Setup application
 add_executable(${PROJECT_NAME} ${SOURCES})
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/inc ${CMAKE_SOURCE_DIR}/src)
+target_include_directories(${PROJECT_NAME} PRIVATE ${Boost_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/inc ${CMAKE_SOURCE_DIR}/src)
 
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 
@@ -27,7 +31,7 @@ else ()
     )
 endif ()
 
-target_link_libraries(${PROJECT_NAME} openblas)
+target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} ${Boost_LIBRARIES} openblas)
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 

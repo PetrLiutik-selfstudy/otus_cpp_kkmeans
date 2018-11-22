@@ -1,13 +1,12 @@
 #include "ver.h"
-
+#include "plot.h"
+#include "types.h"
 
 #include <iostream>
 #include <vector>
 
 #include <dlib/clustering.h>
 #include <dlib/rand.h>
-
-using namespace dlib;
 
 int main(int argc, char const *argv[]) {
   std::cout << "kkmeans version: "
@@ -33,13 +32,9 @@ int main(int argc, char const *argv[]) {
   }
 
 
-  using sample_t = matrix<double,2,1> ;
-  using kernel_t = radial_basis_kernel<sample_t> ;
-
-
   // Тестовая модель на основе kcentroid.
-  kcentroid<kernel_t> kc(kernel_t(0.1),0.01, 8);
-  kkmeans<kernel_t> test_model(kc);
+  dlib::kcentroid<kernel_t> kc(kernel_t(0.1),0.01, 8);
+  dlib::kkmeans<kernel_t> test_model(kc);
 
   std::vector<sample_t> samples;
   std::vector<sample_t> initial_centers;
@@ -66,18 +61,28 @@ int main(int argc, char const *argv[]) {
   test_model.train(samples, initial_centers);
 
 
-  // Вывод кластеризованных данных.
-  for(const auto& sample: samples) {
-    auto cluster = test_model(sample);
-    std::cout << sample(0) << ";" << sample(1) << ";cluster" << cluster << std::endl;
-  }
+  if(!make_plot) {
+    // Вывод кластеризованных данных.
+    for(const auto &sample: samples) {
+      auto cluster = test_model(sample);
+      std::cout << sample(0) << ";" << sample(1) << ";cluster" << cluster << std::endl;
+    }
+  } else {
+    // Визуализация.
+    if (make_plot) {
+      std::cout << "Making a plot...";
 
-  // Рисование
-  if(make_plot) {
-    std::cout << "Making a plot..." ;
-    // TODO make a plot.
+      plot_data_t plot_data;
+      for (const auto &sample: samples) {
+        auto cluster = test_model(sample);
+        auto x = sample(0);
+        auto y = sample(1);
+        plot_data[cluster].emplace_back(std::make_pair(x, y));
+      }
 
-    std::cout << "OK" << std::endl;
+      plot(plot_data);
+      std::cout << "OK" << std::endl;
+    }
   }
 
   return 0;
