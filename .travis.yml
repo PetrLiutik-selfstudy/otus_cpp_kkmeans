@@ -1,0 +1,23 @@
+﻿language: cpp
+compiler: gcc
+dist: trusty
+
+addons:
+  apt:
+    sources:
+      - sourceline: "deb http://us.archive.ubuntu.com/ubuntu/ xenial main universe"
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-7
+      - g++-7
+      - libdlib-dev
+      - libopenblas-dev
+
+install:
+  - export CC=gcc-7
+  - export CXX=g++-7
+  - cd "${TRAVIS_BUILD_DIR}"
+
+script:
+  - cmake .
+  - cmake --build .
