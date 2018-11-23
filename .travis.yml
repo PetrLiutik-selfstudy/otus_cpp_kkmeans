@@ -8,6 +8,7 @@ addons:
     packages:
     - gcc-7
     - g++-7
+    - libboost-all-dev
     - libopenblas-dev
     - libdlib-dev
 script:
