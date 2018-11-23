@@ -8,16 +8,16 @@ addons:
       - sourceline: "deb http://us.archive.ubuntu.com/ubuntu/ xenial main universe"
       - ubuntu-toolchain-r-test
     packages:
-      - gcc-8
-      - g++-8
+      - gcc-7
+      - g++-7
       - libboost-all-dev
       - libdlib-dev
       - libopenblas-dev
       - libgnuplot-iostream-dev
 
 install:
-  - export CC=gcc-8
-  - export CXX=g++-8
+  - export CC=gcc-7
+  - export CXX=g++-7
   - cd "${TRAVIS_BUILD_DIR}"
 
 script:
