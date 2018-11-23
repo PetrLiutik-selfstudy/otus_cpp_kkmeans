@@ -6,6 +6,8 @@ else ()
     project(kkmeans VERSION 1.1.1)
 endif ()
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+
 find_package(Threads REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Boost COMPONENTS system iostreams filesystem REQUIRED)
