@@ -13,22 +13,12 @@ addons:
       - libboost-all-dev
       - libdlib-dev
       - libopenblas-dev
+      - libgnuplot-iostream-dev
 
-
-before_script:
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 90
-  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 90
-  - wget http://dlib.net/files/dlib-19.16.tar.bz2
-  - tar xf dlib-19.16.tar.bz2
-  - cd dlib-19.16
-  - mkdir build
-  - cd build
-  - cmake ..
-  - cmake --build . --config Release
-  - sudo make install
-  - sudo ldconfig
+install:
+  - export CC=gcc-8
+  - export CXX=g++-8
   - cd "${TRAVIS_BUILD_DIR}"
-
 
 script:
   - cmake .
