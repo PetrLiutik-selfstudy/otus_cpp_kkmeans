@@ -1,6 +1,6 @@
 #include "plot.h"
 
-#include "../gnuplot/gnuplot-iostream.h"
+#include "gnuplot-iostream.h"
 
 void plot(const plot_data_t& plot_data) {
   Gnuplot gp("gnuplot -persist");
