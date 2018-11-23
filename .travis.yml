@@ -1,4 +1,4 @@
-﻿dist: trusty
+﻿dist: xenial
 language: cpp
 addons:
   apt:
@@ -11,7 +11,6 @@ addons:
     - libboost-all-dev
     - libopenblas-dev
     - libdlib-dev
-    - libgnuplot-iostream-dev
 script:
 - export CC=gcc-7
 - export CXX=g++-7
