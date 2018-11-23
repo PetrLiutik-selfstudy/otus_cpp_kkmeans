@@ -31,7 +31,7 @@ else ()
     )
 endif ()
 
-target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} ${Boost_LIBRARIES} openblas)
+target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} ${Boost_LIBRARIES} dlib openblas)
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 
