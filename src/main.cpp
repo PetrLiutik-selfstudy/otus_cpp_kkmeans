@@ -33,7 +33,7 @@ int main(int argc, char const *argv[]) {
 
 
   // Тестовая модель на основе kcentroid.
-  dlib::kcentroid<kernel_t> kc(kernel_t(0.1),0.01, 8);
+  dlib::kcentroid<kernel_t> kc(kernel_t(0.01),0.01, 8);
   dlib::kkmeans<kernel_t> test_model(kc);
 
   std::vector<sample_t> samples;
